@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="Sky Fighter - An arcade-style 2D plane shooting game">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#1a1a3a">
+    <title>Sky Fighter - Plane Shooting Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Main Game Canvas -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- UI Overlay -->
+    <div id="ui-overlay">
+        <!-- Health Bar -->
+        <div id="health-container">
+            <span id="health-icon">❤️</span>
+            <div id="health-bar">
+                <div id="health-fill"></div>
+            </div>
+            <span id="health-text">100</span>
+        </div>
+
+        <!-- Score Display -->
+        <div id="score-container">
+            <span id="score-label">SCORE</span>
+            <span id="score-value">0</span>
+        </div>
+
+        <!-- Level/Area Indicator -->
+        <div id="level-container">
+            <span id="level-label">AREA</span>
+            <span id="level-value">1</span>
+        </div>
+
+        <!-- Power-up Indicators -->
+        <div id="powerup-container">
+            <div id="powerup-rapid" class="powerup-indicator" title="Rapid Fire">
+                <span class="powerup-icon">⚡</span>
+                <span class="powerup-timer"></span>
+            </div>
+            <div id="powerup-shield" class="powerup-indicator" title="Shield">
+                <span class="powerup-icon">🛡️</span>
+                <span class="powerup-timer"></span>
+            </div>
+            <div id="powerup-damage" class="powerup-indicator" title="Double Damage">
+                <span class="powerup-icon">💥</span>
+                <span class="powerup-timer"></span>
+            </div>
+            <div id="powerup-bomb" class="powerup-indicator" title="Bomb Ready">
+                <span class="powerup-icon">💣</span>
+                <span class="powerup-count"></span>
+            </div>
+            <div id="powerup-life" class="powerup-indicator" title="Extra Lives">
+                <span class="powerup-icon">💚</span>
+                <span class="powerup-count"></span>
+            </div>
+        </div>
+
+        <!-- Sound Toggle -->
+        <button id="sound-toggle" title="Toggle Sound">🔊</button>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="start-screen" class="screen">
+        <div class="screen-content">
+            <h1 class="game-title">✈️ SKY FIGHTER</h1>
+            <p class="game-subtitle">Defend the skies from enemy forces!</p>
+            <div class="controls-info">
+                <h3>✈️ CONTROLS</h3>
+                <div class="controls-grid">
+                    <div class="control-item">
+                        <span class="control-key">W A S D</span>
+                        <span class="control-desc">Move</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="control-key">SPACE</span>
+                        <span class="control-desc">Shoot</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="control-key">B</span>
+                        <span class="control-desc">Bomb</span>
+                    </div>
+                </div>
+                <p class="mobile-hint">📱 Touch controls available on mobile!</p>
+            </div>
+            <div class="powerups-info">
+                <h3>🎁 POWER-UPS</h3>
+                <div class="powerups-grid">
+                    <span class="powerup-preview rapid">⚡</span>
+                    <span class="powerup-preview shield">🛡️</span>
+                    <span class="powerup-preview damage">💥</span>
+                    <span class="powerup-preview bomb">💣</span>
+                    <span class="powerup-preview life">💚</span>
+                </div>
+            </div>
+            <button id="start-button" class="neon-button">🚀 START MISSION</button>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="screen hidden">
+        <div class="screen-content">
+            <h1 class="gameover-title">💥 MISSION FAILED</h1>
+            <div class="final-score">
+                <span class="score-label">Final Score</span>
+                <span id="final-score-value" class="score-number">0</span>
+            </div>
+            <div class="high-score">
+                <span class="score-label">High Score</span>
+                <span id="high-score-value" class="score-number">0</span>
+            </div>
+            <div class="stats">
+                <p>✈️ Enemies Destroyed: <span id="enemies-defeated">0</span></p>
+                <p>⏱️ Time Survived: <span id="time-survived">0:00</span></p>
+            </div>
+            <button id="restart-button" class="neon-button">🔄 RESTART MISSION</button>
+        </div>
+    </div>
+
+    <!-- Mobile Touch Controls (shown on touch devices) -->
+    <div id="mobile-controls">
+        <!-- Joystick Area (left side) -->
+        <div id="joystick-zone">
+            <div id="joystick-container">
+                <div id="joystick-base">
+                    <div id="joystick-stick"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons (right side) -->
+        <div id="action-buttons">
+            <button id="bomb-button" aria-label="Use Bomb">💣</button>
+            <button id="fire-button" aria-label="Fire">🔥</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="audio.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>
